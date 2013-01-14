@@ -79,7 +79,7 @@ package {['mod_python',
 # Packages for Statsd
 package {'zlib-static':
   ensure => installed,
-# available from nodejs repository/channel
+}
 package {'nodejs':
   ensure => installed,
 }
@@ -91,30 +91,3 @@ package {'nodejs-express':
 package {['graphite-web','python-whisper','python-carbon']:
   ensure => installed,
 }
-# TODO: Create augeas lenses for /etc/carbon/storage-schemas.conf
-#  Cribbed from http://projects.puppetlabs.com/projects/1/wiki/puppet_augeas
-#  Usage:
-#  graphite::carbon::schema {'1min_for_1day':
-#    priority   => 0,
-#    pattern    => '^carbon\.',
-#    retentions => '60s:1d',
-#  }
-#define graphite::carbon::schema ( $name = $title, $priority, $retentions, $pattern ) {
-#  # include graphite
-#  # include graphite::params
-#  $key = "$name/$pattern/$retention"
-#  $confdir = $::graphite::carbon::params::confdir
-#  $context = "files/${::graphite::carbon::params::confdir}/storage-schemas.conf"
-#  $path_list = "name[.=\"${name}\"][./pattern=\"${pattern}\" and ./retentions=\"${retentions}\"]"
-#  $path_exact = "name[.=\"${name}\"][./pattern=\"${pattern}\" and ./retentions=\"${retentions}\"]"
-#
-#  augeas {"carbon/$key":
-#    context => $context,
-#    onlyif  => "match $path_exact size != 1",
-#    changes => [
-#      "set dir[last()]/name $name",
-#      "set dir[last()]/pattern $pattern",
-#      "set dir[last()]/retentions $retentions",
-#    ],
-#  }
-#}
