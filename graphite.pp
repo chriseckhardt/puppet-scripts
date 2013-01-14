@@ -70,7 +70,7 @@ package {['mod_python',
           'apr',
           'apr-util',
           'apr-util-ldap',
-          'memcache',
+          'memcached',
           'bitmap',
           'bitmap-fonts']:
   ensure => installed,
