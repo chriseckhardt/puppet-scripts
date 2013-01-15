@@ -4,12 +4,14 @@ stage {'pre':
   before => Stage['main'],
 }
 
+
 host {'puppet':
   ensure => present,
   name   => 'puppet',
   ip     => '192.168.3.10',
   stage  => pre,
 }
+
 
 # Node repositories
 yumrepo {'epel-nodejs':
@@ -19,7 +21,6 @@ yumrepo {'epel-nodejs':
   gpgcheck => 0,
   stage    => pre,
 }
-
 yumrepo {'epel-nodejs-sources':
   descr    => 'node.js stack in development: runtime and several npm packages - Source',
   baseurl  => 'http://repos.fedorapeople.org/repos/lkundrak/nodejs/epel-$releasever/SRPMS/',
@@ -27,6 +28,7 @@ yumrepo {'epel-nodejs-sources':
   gpgcheck => 0,
   stage    => pre,
 }
+
 
 # EPEL repositories
 package {'epel-release':
@@ -63,6 +65,7 @@ yumrepo {'epel-source':
   stage          => pre,
 }
 
+
 # Packages available via EPEL
 package {['mod_python',
           'mod_wsgi',
@@ -87,6 +90,7 @@ package {['mod_python',
   ensure => installed,
 }
 
+
 # Packages for Statsd
 package {'zlib-static':
   ensure => installed,
@@ -98,6 +102,7 @@ package {'nodejs':
 package {'nodejs-express':
   ensure => installed,
 }
+
 
 # Graphite's Meat & Taters
 package {['graphite-web','python-whisper','python-carbon']:
